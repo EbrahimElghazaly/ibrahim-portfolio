@@ -105,7 +105,22 @@
             'projects.p6.n':   'Login — Soft UI',
             'projects.p6':     'Soft pastel login with pin input and social login.',
 
-            'exp.label':       '05 · Experience',
+            'filter.all':      'All',
+            'filter.web':      'Websites',
+            'filter.ui':       'Auth / UI',
+
+            'testi.label':     '05 · Testimonials',
+            'testi.title1':    'What People',
+            'testi.title2':    'Say',
+            'testi.sub':       'Feedback from teammates and mentors.',
+            'testi.t1':        'Ibrahim has a rare mix of clean code and strong design sense. He delivered our booking platform front-end ahead of schedule with pixel-perfect quality.',
+            'testi.t1.role':   'Project Mentor — DEPI',
+            'testi.t2':        'Working with Ibrahim on the E-Learning platform was smooth. He turned every Figma frame into production-ready code without losing a single detail.',
+            'testi.t2.role':   'UI/UX Designer',
+            'testi.t3':        'Very responsive, professional, and always open to feedback. I\'d recommend Ibrahim for any front-end project that needs care and speed.',
+            'testi.t3.role':   'Freelance Client',
+
+            'exp.label':       '06 · Experience',
             'exp.title1':      'Work &',
             'exp.title2':      'Education',
             'exp.sub':         'My journey so far.',
@@ -130,7 +145,7 @@
             'cta.sub':         "Let's build something great together.",
             'cta.btn':         "Let's Talk",
 
-            'contact.label':   '06 · Contact',
+            'contact.label':   '07 · Contact',
             'contact.title1':  'Get In',
             'contact.title2':  'Touch',
             'contact.sub':     "Have a project? Let's discuss it.",
@@ -248,7 +263,22 @@
             'projects.p6.n':   'تسجيل — Soft UI',
             'projects.p6':     'تسجيل بألوان ناعمة مع إدخال PIN.',
 
-            'exp.label':       '٠٥ · الخبرات',
+            'filter.all':      'الكل',
+            'filter.web':      'مواقع',
+            'filter.ui':       'تسجيل / واجهة',
+
+            'testi.label':     '٠٥ · آراء العملاء',
+            'testi.title1':    'ماذا يقول',
+            'testi.title2':    'الآخرون',
+            'testi.sub':       'آراء من الزملاء والمرشدين.',
+            'testi.t1':        'إبراهيم عنده مزيج نادر من الكود النظيف والحس التصميمي القوي. سلّم واجهة منصة الحجز قبل الموعد بجودة مثالية.',
+            'testi.t1.role':   'مرشد مشروع — DEPI',
+            'testi.t2':        'العمل مع إبراهيم على منصة التعليم كان سلساً. حوّل كل تصميم Figma إلى كود جاهز للإنتاج بدون فقدان أي تفصيلة.',
+            'testi.t2.role':   'مصممة UI/UX',
+            'testi.t3':        'متجاوب جداً، احترافي، ومنفتح دائماً على الملاحظات. أنصح بإبراهيم لأي مشروع واجهات يحتاج دقة وسرعة.',
+            'testi.t3.role':   'عميل مستقل',
+
+            'exp.label':       '٠٦ · الخبرات',
             'exp.title1':      'العمل و',
             'exp.title2':      'التعليم',
             'exp.sub':         'رحلتي حتى الآن.',
@@ -273,7 +303,7 @@
             'cta.sub':         'لنبنِ شيئاً رائعاً معاً.',
             'cta.btn':         'لنتحدث',
 
-            'contact.label':   '٠٦ · تواصل',
+            'contact.label':   '٠٧ · تواصل',
             'contact.title1':  'تواصل',
             'contact.title2':  'معي',
             'contact.sub':     'عندك مشروع؟ لنتناقش فيه.',
@@ -304,7 +334,28 @@
     let currentTheme = localStorage.getItem('portfolio-theme') || 'dark';
 
     /* ============================================================
-       3. THEME MANAGEMENT
+       3. UTILS
+       ============================================================ */
+    function debounce(fn, wait = 100) {
+        let t;
+        return function (...args) {
+            clearTimeout(t);
+            t = setTimeout(() => fn.apply(this, args), wait);
+        };
+    }
+
+    function throttle(fn, limit = 100) {
+        let inThrottle = false;
+        return function (...args) {
+            if (inThrottle) return;
+            fn.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => (inThrottle = false), limit);
+        };
+    }
+
+    /* ============================================================
+       4. THEME MANAGEMENT
        ============================================================ */
     function initTheme() {
         const btn = document.getElementById('themeBtn');
@@ -324,7 +375,7 @@
     }
 
     /* ============================================================
-       4. LANGUAGE MANAGEMENT
+       5. LANGUAGE MANAGEMENT
        ============================================================ */
     function applyLanguage(lang) {
         const t = TRANSLATIONS[lang];
@@ -369,7 +420,7 @@
     }
 
     /* ============================================================
-       5. NAVBAR — Sticky on Scroll
+       6. NAVBAR — Sticky on Scroll
        ============================================================ */
     function initNavbar() {
         const navbar = document.getElementById('navbar');
@@ -383,12 +434,12 @@
             }
         };
 
-        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('scroll', throttle(onScroll, 80), { passive: true });
         onScroll();
     }
 
     /* ============================================================
-       6. MOBILE MENU
+       7. MOBILE MENU
        ============================================================ */
     function initMobileMenu() {
         const burger = document.getElementById('burger');
@@ -397,16 +448,23 @@
 
         if (!burger || !nav) return;
 
+        const setExpanded = (open) => {
+            burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
+
         const closeMenu = () => {
             burger.classList.remove('is-open');
             nav.classList.remove('is-open');
             document.body.style.overflow = '';
+            setExpanded(false);
         };
 
         burger.addEventListener('click', () => {
-            burger.classList.toggle('is-open');
-            nav.classList.toggle('is-open');
-            document.body.style.overflow = nav.classList.contains('is-open') ? 'hidden' : '';
+            const isOpen = !nav.classList.contains('is-open');
+            burger.classList.toggle('is-open', isOpen);
+            nav.classList.toggle('is-open', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+            setExpanded(isOpen);
         });
 
         navLinks.forEach((link) => link.addEventListener('click', closeMenu));
@@ -427,13 +485,13 @@
             }
         });
 
-        window.addEventListener('resize', () => {
+        window.addEventListener('resize', debounce(() => {
             if (window.innerWidth > 1024) closeMenu();
-        });
+        }, 150));
     }
 
     /* ============================================================
-       7. SMOOTH SCROLL
+       8. SMOOTH SCROLL
        ============================================================ */
     function initSmoothScroll() {
         document.querySelectorAll('a[href^="#"]').forEach((link) => {
@@ -460,7 +518,7 @@
     }
 
     /* ============================================================
-       8. ACTIVE NAV LINK
+       9. ACTIVE NAV LINK
        ============================================================ */
     function initActiveNav() {
         const sections = document.querySelectorAll('section[id]');
@@ -488,12 +546,12 @@
             });
         };
 
-        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('scroll', throttle(onScroll, 120), { passive: true });
         onScroll();
     }
 
     /* ============================================================
-       9. SCROLL REVEAL
+       10. SCROLL REVEAL
        ============================================================ */
     function initScrollReveal() {
         const selectors = [
@@ -539,7 +597,7 @@
     }
 
     /* ============================================================
-       10. SKILL BARS ANIMATION
+       11. SKILL BARS ANIMATION
        ============================================================ */
     function initSkillBars() {
         const fills = document.querySelectorAll('.skill-fill');
@@ -569,7 +627,7 @@
     }
 
     /* ============================================================
-       11. CONTACT FORM — Formspree AJAX
+       12. CONTACT FORM — Formspree AJAX
        ============================================================ */
     function initContactForm() {
         const form = document.getElementById('contactForm');
@@ -666,7 +724,7 @@
     }
 
     /* ============================================================
-       12. BACK TO TOP
+       13. BACK TO TOP
        ============================================================ */
     function initBackToTop() {
         const btn = document.getElementById('toTop');
@@ -680,7 +738,7 @@
             }
         };
 
-        window.addEventListener('scroll', toggle, { passive: true });
+        window.addEventListener('scroll', throttle(toggle, 120), { passive: true });
 
         btn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -690,7 +748,7 @@
     }
 
     /* ============================================================
-       13. CURRENT YEAR
+       14. CURRENT YEAR
        ============================================================ */
     function initYear() {
         const el = document.getElementById('year');
@@ -698,7 +756,7 @@
     }
 
     /* ============================================================
-       14. IMAGE FALLBACK
+       15. IMAGE FALLBACK
        ============================================================ */
     function initImageFallback() {
         document.querySelectorAll('img').forEach((img) => {
@@ -725,7 +783,7 @@
     }
 
     /* ============================================================
-       15. BOOT
+       16. BOOT
        ============================================================ */
     function boot() {
         initTheme();
@@ -742,7 +800,7 @@
         initImageFallback();
 
         console.log(
-            '%c🚀 Portfolio Ready — Premium Bento Build',
+            '%c🚀 Portfolio Ready — Premium Bento Build v2.0',
             'color: #7c3aed; font-weight: bold; font-size: 14px;'
         );
     }
