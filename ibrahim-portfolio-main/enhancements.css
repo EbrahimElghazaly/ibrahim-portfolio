@@ -1,0 +1,283 @@
+/* ============================================================
+   ENHANCEMENTS — Loader, Cursor, Filter, Testimonials,
+   Scroll Progress, Magnetic, Typewriter
+   ============================================================ */
+
+/* ---------- 1. LOADING SCREEN ---------- */
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+.loader.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.loader-logo {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loader-logo span {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 800;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: 2;
+}
+.loader-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: var(--primary);
+    border-right-color: var(--secondary);
+    animation: spin 1.2s linear infinite;
+}
+.loader-bar {
+    width: 220px;
+    height: 3px;
+    background: var(--bg-3);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+.loader-progress {
+    width: 0;
+    height: 100%;
+    background: var(--grad-soft);
+    border-radius: inherit;
+    transition: width 0.3s ease;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- 2. CUSTOM CURSOR ---------- */
+.cursor-dot,
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+.cursor-ring {
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid var(--primary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, border-color 0.3s, opacity 0.3s;
+}
+body.has-cursor .cursor-dot,
+body.has-cursor .cursor-ring { opacity: 1; }
+body.has-cursor { cursor: none; }
+body.has-cursor a,
+body.has-cursor button,
+body.has-cursor input,
+body.has-cursor textarea { cursor: none; }
+.cursor-ring.is-hover {
+    width: 58px;
+    height: 58px;
+    border-color: var(--secondary);
+    background: rgba(124, 58, 237, 0.08);
+}
+@media (pointer: coarse) {
+    .cursor-dot, .cursor-ring { display: none !important; }
+    body.has-cursor { cursor: auto; }
+}
+
+/* ---------- 3. SCROLL PROGRESS ---------- */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: var(--grad);
+    z-index: 9998;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.6);
+}
+
+/* ---------- 4. TYPEWRITER ---------- */
+.typewriter::after {
+    content: '|';
+    margin-left: 4px;
+    color: var(--primary-2);
+    animation: blink 1s steps(2) infinite;
+}
+@keyframes blink {
+    0%, 50%   { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* ---------- 5. MAGNETIC BUTTONS ---------- */
+.magnetic {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+    will-change: transform;
+}
+
+/* ---------- 6. PROJECT FILTER ---------- */
+.projects-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 42px;
+}
+.filter-btn {
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-3);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    transition: all var(--t);
+}
+.filter-btn:hover {
+    color: var(--primary-2);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+.filter-btn.is-active {
+    color: #fff;
+    background: var(--grad-soft);
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+}
+
+/* Hide/Show animation for filtered projects */
+.project.is-filtered-out {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+/* ---------- 7. PROJECT ACTIONS (Live + Code) ---------- */
+.project-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border-2);
+}
+.project-actions .btn {
+    flex: 1;
+    font-size: 13px;
+    padding: 10px 14px;
+}
+
+/* ---------- 8. TESTIMONIALS ---------- */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+.testimonial-card {
+    position: relative;
+    padding: 32px 28px 26px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: all var(--t2);
+    overflow: hidden;
+}
+.testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--grad-soft);
+    opacity: 0;
+    transition: opacity var(--t);
+}
+.testimonial-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-glow);
+    box-shadow: var(--glow-soft);
+}
+.testimonial-card:hover::before { opacity: 1; }
+.testi-quote {
+    position: absolute;
+    top: 12px;
+    right: 22px;
+    font-family: Georgia, serif;
+    font-size: 72px;
+    line-height: 1;
+    color: var(--primary);
+    opacity: 0.15;
+}
+[dir="rtl"] .testi-quote { right: auto; left: 22px; }
+.testi-text {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text-2);
+    margin-bottom: 22px;
+    position: relative;
+    z-index: 1;
+}
+.testi-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+}
+.testi-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--grad-soft);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 18px;
+    flex-shrink: 0;
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.3);
+}
+.testi-meta { display: flex; flex-direction: column; gap: 2px; }
+.testi-meta strong { font-size: 14px; font-weight: 700; color: var(--text); }
+.testi-meta span { font-size: 12px; color: var(--text-3); }
+
+/* ---------- 9. REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .ambient-blob,
+    .marquee-track,
+    .grad,
+    .badge-dot,
+    .loader-ring {
+        animation: none !important;
+    }
+    .reveal { opacity: 1 !important; transform: none !important; }
+}

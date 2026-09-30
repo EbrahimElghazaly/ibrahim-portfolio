@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibrahim Elghazaly — Front-End Developer</title>
+    <meta name="description" content="Front-End Developer with 2+ years of experience building modern, responsive web interfaces using React, Tailwind CSS, and JavaScript.">
+    <meta name="author" content="Ibrahim Mohamed Elghazaly">
+    <meta name="theme-color" content="#7c3aed">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ibrahim Elghazaly — Front-End Developer">
+    <meta property="og:description" content="Building fast, clean, and responsive web interfaces with React & Tailwind CSS.">
+    <meta property="og:url" content="https://elghazaly-web.netlify.app/">
+    <meta property="og:image" content="https://elghazaly-web.netlify.app/assets/images/og-cover.jpg">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ar_EG">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ibrahim Elghazaly — Front-End Developer">
+    <meta name="twitter:description" content="Building fast, clean, and responsive web interfaces.">
+    <meta name="twitter:image" content="https://elghazaly-web.netlify.app/assets/images/og-cover.jpg">
+
+    <link rel="icon" type="image/webp" href="assets/images/profile.webp">
+    <link rel="apple-touch-icon" href="assets/images/profile.webp">
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ibrahim Mohamed Elghazaly",
+      "jobTitle": "Front-End Developer",
+      "url": "https://elghazaly-web.netlify.app/",
+      "email": "eng.barhomaa@gmail.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "El Santa, Gharbia", "addressCountry": "EG" },
+      "sameAs": [
+        "https://github.com/Hema-elghazaly",
+        "https://linkedin.com/in/ebrahim-elghazaly-a34795349",
+        "https://www.youtube.com/channel/UCPDiJfqsEA3Z6h_omiqhSbQ"
+      ],
+      "knowsAbout": ["React", "Tailwind CSS", "JavaScript", "HTML5", "CSS3", "Responsive Design"]
+    }
+    </script>
+
+    <script>
+        (function () {
+            const theme = localStorage.getItem('portfolio-theme') || 'dark';
+            const lang  = localStorage.getItem('portfolio-lang')  || 'en';
+            document.documentElement.setAttribute('data-theme', theme);
+            document.documentElement.setAttribute('lang', lang);
+            if (lang === 'ar') document.documentElement.setAttribute('dir', 'rtl');
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://formspree.io">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="enhancements.css">
+</head>
+<body>
+
+    <!-- Loading Screen
+    <div class="loader" id="loader" aria-hidden="true">
+        <div class="loader-logo">
+            <span>IE</span>
+            <div class="loader-ring"></div>
+        </div>
+        <div class="loader-bar"><div class="loader-progress"></div></div>
+    </div> -->
+
+    <!-- Custom Cursor (Desktop only) -->
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- Ambient Background -->
+    <div class="ambient-bg" aria-hidden="true">
+        <div class="ambient-blob blob-1"></div>
+        <div class="ambient-blob blob-2"></div>
+        <div class="ambient-blob blob-3"></div>
+        <div class="ambient-grid"></div>
+    </div>
+
+    <!-- ============================================================
+         NAVBAR
+    ============================================================ -->
+    <header class="navbar" id="navbar">
+        <div class="container nav-inner">
+            <a href="#home" class="brand" aria-label="Home">
+                <span class="brand-avatar">
+                    <img src="assets/images/profile.webp" alt="Ibrahim" width="42" height="42">
+                </span>
+                <span class="brand-text">
+                    <strong>Ibrahim</strong>
+                    <small data-i18n="nav.role">Front-End Dev</small>
+                </span>
+            </a>
+
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="#home"       class="nav-link is-active" data-i18n="nav.home">Home</a>
+                <a href="#about"      class="nav-link" data-i18n="nav.about">About</a>
+                <a href="#services"   class="nav-link" data-i18n="nav.services">Services</a>
+                <a href="#skills"     class="nav-link" data-i18n="nav.skills">Skills</a>
+                <a href="#projects"   class="nav-link" data-i18n="nav.projects">Projects</a>
+                <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
+                <a href="#contact"    class="nav-link" data-i18n="nav.contact">Contact</a>
+            </nav>
+
+            <div class="nav-tools">
+                <button class="tool-btn lang-btn" id="langBtn" aria-label="Switch language">
+                    <span class="lang-en">EN</span>
+                    <span class="lang-sep">/</span>
+                    <span class="lang-ar">ع</span>
+                </button>
+
+                <button class="tool-btn theme-btn" id="themeBtn" aria-label="Toggle theme">
+                    <svg class="i-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+
+                <a href="assets/cv/Ibrahim-Elghazaly-CV.pdf" download class="btn btn-primary btn-sm nav-cv" data-i18n="nav.cv">Download CV</a>
+
+                <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <img src="assets/images/web-background.webp" alt="" class="hero-bg-img" fetchpriority="high">
+            <div class="hero-bg-overlay"></div>
+        </div>
+
+        <div class="container hero-inner">
+            <div class="hero-main">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span data-i18n="hero.badge">Available for freelance</span>
+                </div>
+
+                <h1 class="hero-title">
+                    <span data-i18n="hero.hi">Hi, I'm</span>
+                    <span class="grad">Ibrahim Elghazaly</span>
+                </h1>
+
+                <h2 class="hero-role">
+                    <span class="typewriter" data-i18n="hero.role">Front-End Developer</span>
+                </h2>
+
+                <p class="hero-lead" data-i18n-html="hero.lead">
+                    I build <strong>fast</strong>, <strong>clean</strong>, and <strong>responsive</strong> web interfaces using React, Tailwind CSS, and modern JavaScript.
+                </p>
+
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary magnetic">
+                        <span data-i18n="hero.cta1">View My Work</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                    <a href="#contact" class="btn btn-ghost magnetic" data-i18n="hero.cta2">Let's Talk</a>
+                </div>
+
+                <div class="hero-social">
+                    <a href="https://github.com/Hema-elghazaly" target="_blank" rel="noopener" aria-label="GitHub">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1 .8 2.1v3.1c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/ebrahim-elghazaly-a34795349" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCPDiJfqsEA3Z6h_omiqhSbQ" target="_blank" rel="noopener" aria-label="YouTube">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <a href="mailto:eng.barhomaa@gmail.com" aria-label="Email">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-side">
+                <div class="hero-photo-card">
+                    <img src="assets/images/profile.webp" alt="Ibrahim Elghazaly" width="480" height="480" fetchpriority="high">
+                    <div class="hero-photo-badge">
+                        <span class="badge-num">2+</span>
+                        <span class="badge-txt" data-i18n="hero.years">Years Exp.</span>
+                    </div>
+                </div>
+
+                <div class="hero-stat-card">
+                    <div class="stat-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <strong class="counter" data-target="6">0</strong>
+                        <span data-i18n="hero.projects">Projects</span>
+                    </div>
+                </div>
+
+                <div class="hero-stat-card">
+                    <div class="stat-icon gold">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <strong class="counter" data-target="10">0</strong>
+                        <span data-i18n="hero.techs">Techs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-marquee">
+            <div class="marquee-track">
+                <span>HTML5</span><span>•</span><span>CSS3</span><span>•</span><span>JavaScript</span><span>•</span>
+                <span>React</span><span>•</span><span>Tailwind CSS</span><span>•</span><span>Git</span><span>•</span>
+                <span>GitHub</span><span>•</span><span>Responsive Design</span><span>•</span>
+                <span>HTML5</span><span>•</span><span>CSS3</span><span>•</span><span>JavaScript</span><span>•</span>
+                <span>React</span><span>•</span><span>Tailwind CSS</span><span>•</span><span>Git</span><span>•</span>
+                <span>GitHub</span><span>•</span><span>Responsive Design</span><span>•</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT (same as yours)
+    ============================================================ -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="sec-head">
+                <span class="sec-label" data-i18n="about.label">01 · About</span>
+                <h2 class="sec-title">
+                    <span data-i18n="about.title1">About</span>
+                    <span class="grad" data-i18n="about.title2">Me</span>
+                </h2>
+                <p class="sec-sub" data-i18n="about.sub">Get to know me and what I do.</p>
+            </div>
+
+            <div class="about-bento">
+                <div class="bento-card bento-lead">
+                    <div class="bento-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <p class="about-lead" data-i18n-html="about.lead">
+                        <strong>Front-End Developer</strong> with <strong>2+ years</strong> of hands-on experience building modern, responsive, and user-focused web interfaces. Skilled in <strong>React</strong>, <strong>Tailwind CSS</strong>, and modern JavaScript — with a strong eye for <strong>UI/UX detail</strong>.
+                    </p>
+                </div>
+
+                <div class="bento-card bento-bio">
+                    <h3 class="bento-title" data-i18n="about.bioTitle">My Story</h3>
+                    <p data-i18n-html="about.p2">Currently in my final year at <strong>Tanta University</strong>, Faculty of Computers and Information Sciences. Completed the <strong>DEPI</strong> Full-Stack training program where I built production-ready web applications.</p>
+                    <p data-i18n-html="about.p3">I focus on turning <strong>complex ideas into simple, elegant interfaces</strong> — whether it's a landing page, a dashboard, or a full SPA. My daily stack: <strong>React, JavaScript, Tailwind CSS, Git</strong>.</p>
+                </div>
+
+                <div class="bento-card bento-info">
+                    <h3 class="bento-title" data-i18n="about.infoTitle">Quick Info</h3>
+                    <ul class="info-list">
+                        <li><span class="info-k" data-i18n="about.k.name">Name</span><span class="info-v">Ibrahim Mohamed Elghazaly</span></li>
+                        <li><span class="info-k" data-i18n="about.k.email">Email</span><span class="info-v">eng.barhomaa@gmail.com</span></li>
+                        <li><span class="info-k" data-i18n="about.k.phone">Phone</span><span class="info-v" dir="ltr">+20 127 071 9250</span></li>
+                    </ul>
+                </div>
+
+                <div class="bento-card bento-featured">
+                    <div class="featured-top">
+                        <div class="featured-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <span data-i18n="about.featured.tag">Featured</span>
+                        </div>
+                    </div>
+                    <h4 class="featured-title" data-i18n="about.featured.title">DEPI Full-Stack Program</h4>
+                    <p class="featured-desc" data-i18n="about.featured.desc">Ranked among top performers in the front-end track. Built production-ready web applications as part of the Digital Egypt Pioneers Initiative.</p>
+                </div>
+
+                <div class="bento-card bento-cta">
+                    <h3 class="bento-title" data-i18n="about.ctaTitle">Let's work together</h3>
+                    <p data-i18n="about.ctaDesc">Have a project in mind? Let's build something great.</p>
+                    <div class="bento-cta-buttons">
+                        <a href="assets/cv/Ibrahim-Elghazaly-CV.pdf" download class="btn btn-primary btn-sm">
+                            <span data-i18n="about.cv">Download CV</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        </a>
+                        <a href="#contact" class="btn btn-ghost btn-sm" data-i18n="about.ctaBtn">Let's Talk</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICES (same as yours)
+    ============================================================ -->
+    <section class="section section-alt" id="services">
+        <div class="container">
+            <div class="sec-head">
+                <span class="sec-label" data-i18n="services.label">02 · Services</span>
+                <h2 class="sec-title">
+                    <span data-i18n="services.title1">What I</span>
+                    <span class="grad" data-i18n="services.title2">Offer</span>
+                </h2>
+                <p class="sec-sub" data-i18n="services.sub">What I can do for your business.</p>
+            </div>
+
+            <div class="services-grid">
+                <article class="service-card">
+                    <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+                    <h3 data-i18n="services.s1.t">Responsive Web Design</h3>
+                    <p data-i18n="services.s1.d">Pixel-perfect interfaces that look great on every screen size.</p>
+                    <ul class="srv-list">
+                        <li data-i18n="services.s1.l1">Mobile-First</li>
+                        <li data-i18n="services.s1.l2">Cross-Browser</li>
+                        <li data-i18n="services.s1.l3">Optimized</li>
+                    </ul>
+                </article>
+
+                <article class="service-card">
+                    <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/></svg></div>
+                    <h3 data-i18n="services.s2.t">React Development</h3>
+                    <p data-i18n="services.s2.d">Modern SPAs built with React and clean component architecture.</p>
+                    <ul class="srv-list">
+                        <li data-i18n="services.s2.l1">Components</li>
+                        <li data-i18n="services.s2.l2">State</li>
+                        <li data-i18n="services.s2.l3">API Integration</li>
+                    </ul>
+                </article>
+
+                <article class="service-card">
+                    <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+                    <h3 data-i18n="services.s3.t">UI Implementation</h3>
+                    <p data-i18n="services.s3.d">Turning Figma designs into clean Tailwind CSS code.</p>
+                    <ul class="srv-list">
+                        <li data-i18n="services.s3.l1">Design → Code</li>
+                        <li data-i18n="services.s3.l2">Tailwind</li>
+                        <li data-i18n="services.s3.l3">Reusable</li>
+                    </ul>
+                </article>
+
+                <article class="service-card">
+                    <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+                    <h3 data-i18n="services.s4.t">Full-Stack Fundamentals</h3>
+                    <p data-i18n="services.s4.d">Connecting front-end to back-end services for full apps.</p>
+                    <ul class="srv-list">
+                        <li data-i18n="services.s4.l1">REST APIs</li>
+                        <li data-i18n="services.s4.l2">Databases</li>
+                        <li data-i18n="services.s4.l3">End-to-End</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SKILLS (same as yours)
+    ============================================================ -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="sec-head">
+                <span class="sec-label" data-i18n="skills.label">03 · Skills</span>
+                <h2 class="sec-title">
+                    <span data-i18n="skills.title1">My</span>
+                    <span class="grad" data-i18n="skills.title2">Skills</span>
+                </h2>
+                <p class="sec-sub" data-i18n="skills.sub">Technologies and tools I use daily.</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-panel">
+                    <h3 class="panel-title" data-i18n="skills.p1">Languages & Frameworks</h3>
+                    <div class="skill-item">
+                        <div class="skill-top"><span>HTML5</span><span>95%</span></div>
+                        <div class="skill-track" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"><div class="skill-fill" data-w="95"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-top"><span>CSS3</span><span>92%</span></div>
+                        <div class="skill-track" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"><div class="skill-fill" data-w="92"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-top"><span>JavaScript</span><span>88%</span></div>
+                        <div class="skill-track" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"><div class="skill-fill" data-w="88"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-top"><span>React</span><span>85%</span></div>
+                        <div class="skill-track" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><div class="skill-fill" data-w="85"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-panel">
+                    <h3 class="panel-title" data-i18n="skills.p2">Styling & Tools</h3>
+                    <div class="skill-item">
+                        <div class="skill-top"><span>Tailwind CSS</span><span>90%</span></div>
+                        <div class="skill-track" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="skill-fill" data-w="90"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-top"><span data-i18n="skills.resp">Responsive Design</span><span>94%</span></div>
+                        <div class="skill-track" role="progressbar" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100"><div class="skill-fill" data-w="94"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-top"><span>Git & GitHub</span><span>87%</span></div>
+                        <div class="skill-track" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100"><div class="skill-fill" data-w="87"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-top"><span data-i18n="skills.fs">Full-Stack</span><span>75%</span></div>
+                        <div class="skill-track" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><div class="skill-fill" data-w="75"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-strip">
+                <span class="tech">HTML5</span><span class="tech">CSS3</span><span class="tech">JavaScript</span>
+                <span class="tech">React</span><span class="tech">Tailwind CSS</span><span class="tech">Git</span>
+                <span class="tech">GitHub</span><span class="tech" data-i18n="skills.resp">Responsive Design</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         PROJECTS (with filter + live/code buttons)
+    ============================================================ -->
+    <section class="section section-alt" id="projects">
+        <div class="container">
+            <div class="sec-head">
+                <span class="sec-label" data-i18n="projects.label">04 · Projects</span>
+                <h2 class="sec-title">
+                    <span data-i18n="projects.title1">Selected</span>
+                    <span class="grad" data-i18n="projects.title2">Work</span>
+                </h2>
+                <p class="sec-sub" data-i18n="projects.sub">Some of the projects I've built recently.</p>
+            </div>
+
+            <!-- Filter -->
+            <div class="projects-filter" role="tablist">
+                <button class="filter-btn is-active" data-filter="all" data-i18n="filter.all">All</button>
+                <button class="filter-btn" data-filter="web" data-i18n="filter.web">Websites</button>
+                <button class="filter-btn" data-filter="ui" data-i18n="filter.ui">Auth / UI</button>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <article class="project" data-category="web">
+                    <div class="project-cover">
+                        <img src="assets/images/projects/ghazaliano.webp" alt="Ghazaliano" loading="lazy" width="600" height="375">
+                        <div class="project-overlay">
+                            <a href="https://hema-elghazaly.github.io/elghazaly-dev/" target="_blank" rel="noopener" class="project-view" aria-label="View project">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat" data-i18n="projects.cat.web">Website</span>
+                        <h3 class="project-name">Ghazaliano</h3>
+                        <p class="project-text" data-i18n="projects.p1">Personal portfolio with a dark modern aesthetic.</p>
+                        <div class="project-stack"><span>HTML</span><span>CSS</span><span>JS</span></div>
+                        <div class="project-actions">
+                            <a href="https://hema-elghazaly.github.io/elghazaly-dev/" target="_blank" rel="noopener" class="btn btn-sm btn-primary">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                Live Demo
+                            </a>
+                            <a href="https://github.com/Hema-elghazaly/elghazaly-dev" target="_blank" rel="noopener" class="btn btn-sm btn-ghost">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1 .8 2.1v3.1c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project" data-category="ui">
+                    <div class="project-cover">
+                        <img src="assets/images/projects/login-1.webp" alt="Login Modern" loading="lazy" width="600" height="375">
+                        <div class="project-overlay">
+                            <a href="https://hema-elghazaly.github.io/login_signup-Ebrahim_Elghazaly/" target="_blank" rel="noopener" class="project-view" aria-label="View project">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat" data-i18n="projects.cat.ui">Auth / UI</span>
+                        <h3 class="project-name" data-i18n="projects.p2.n">Login — Modern</h3>
+                        <p class="project-text" data-i18n="projects.p2">Split-screen login with welcome message and social login.</p>
+                        <div class="project-stack"><span>HTML</span><span>CSS</span></div>
+                        <div class="project-actions">
+                            <a href="https://hema-elghazaly.github.io/login_signup-Ebrahim_Elghazaly/" target="_blank" rel="noopener" class="btn btn-sm btn-primary">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                Live Demo
+                            </a>
+                            <a href="https://github.com/Hema-elghazaly/login_signup-Ebrahim_Elghazaly" target="_blank" rel="noopener" class="btn btn-sm btn-ghost">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1 .8 2.1v3.1c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project" data-category="web">
+                    <div class="project-cover">
+                        <img src="assets/images/projects/website-private.webp" alt="Private Website" loading="lazy" width="600" height="375">
+                        <div class="project-overlay">
+                            <a href="https://elghazaly-web.netlify.app/" target="_blank" rel="noopener" class="project-view" aria-label="View project">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat" data-i18n="projects.cat.web">Website</span>
+                        <h3 class="project-name" data-i18n="projects.p3.n">Private Website</h3>
+                        <p class="project-text" data-i18n="projects.p3">RTL Arabic content page with clean layout.</p>
+                        <div class="project-stack"><span>HTML</span><span>CSS</span><span>RTL</span></div>
+                        <div class="project-actions">
+                            <a href="https://elghazaly-web.netlify.app/" target="_blank" rel="noopener" class="btn btn-sm btn-primary">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project" data-category="ui">
+                    <div class="project-cover">
+                        <img src="assets/images/projects/login-2.webp" alt="Sign In" loading="lazy" width="600" height="375">
+                        <div class="project-overlay">
+                            <a href="https://hema-elghazaly.github.io/login--elghazaly/" target="_blank" rel="noopener" class="project-view" aria-label="View project">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat" data-i18n="projects.cat.ui">Auth / UI</span>
+                        <h3 class="project-name" data-i18n="projects.p4.n">Sign In Page</h3>
+                        <p class="project-text" data-i18n="projects.p4">Illustrated sign-in card with a bold gradient CTA.</p>
+                        <div class="project-stack"><span>HTML</span><span>CSS</span></div>
+                        <div class="project-actions">
+                            <a href="https://hema-elghazaly.github.io/login--elghazaly/" target="_blank" rel="noopener" class="btn btn-sm btn-primary">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project" data-category="ui">
+                    <div class="project-cover">
+                        <img src="assets/images/projects/login-3.webp" alt="Minimal Login" loading="lazy" width="600" height="375">
+                        <div class="project-overlay">
+                            <a href="https://hema-elghazaly.github.io/login-ebrahim-elghazaly/#" target="_blank" rel="noopener" class="project-view" aria-label="View project">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat" data-i18n="projects.cat.ui">Auth / UI</span>
+                        <h3 class="project-name" data-i18n="projects.p5.n">Login — Minimal</h3>
+                        <p class="project-text" data-i18n="projects.p5">Minimal login on a vivid gradient background.</p>
+                        <div class="project-stack"><span>HTML</span><span>CSS</span></div>
+                        <div class="project-actions">
+                            <a href="https://hema-elghazaly.github.io/login-ebrahim-elghazaly/#" target="_blank" rel="noopener" class="btn btn-sm btn-primary">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project" data-category="ui">
+                    <div class="project-cover">
+                        <img src="assets/images/projects/login-4.webp" alt="Soft UI" loading="lazy" width="600" height="375">
+                        <div class="project-overlay">
+                            <a href="https://hema-elghazaly.github.io/log-web/" target="_blank" rel="noopener" class="project-view" aria-label="View project">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat" data-i18n="projects.cat.ui">Auth / UI</span>
+                        <h3 class="project-name" data-i18n="projects.p6.n">Login — Soft UI</h3>
+                        <p class="project-text" data-i18n="projects.p6">Soft pastel login with pin input and social login.</p>
+                        <div class="project-stack"><span>HTML</span><span>CSS</span></div>
+                        <div class="project-actions">
+                            <a href="https://hema-elghazaly.github.io/log-web/" target="_blank" rel="noopener" class="btn btn-sm btn-primary">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         TESTIMONIALS (NEW)
+    ============================================================ -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div class="sec-head">
+                <span class="sec-label" data-i18n="testi.label">05 · Testimonials</span>
+                <h2 class="sec-title">
+                    <span data-i18n="testi.title1">What People</span>
+                    <span class="grad" data-i18n="testi.title2">Say</span>
+                </h2>
+                <p class="sec-sub" data-i18n="testi.sub">Feedback from teammates and mentors.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <article class="testimonial-card">
+                    <div class="testi-quote">"</div>
+                    <p class="testi-text" data-i18n="testi.t1">Ibrahim has a rare mix of clean code and strong design sense. He delivered our booking platform front-end ahead of schedule with pixel-perfect quality.</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">A</div>
+                        <div class="testi-meta">
+                            <strong>Ahmed Samir</strong>
+                            <span data-i18n="testi.t1.role">Project Mentor — DEPI</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="testimonial-card">
+                    <div class="testi-quote">"</div>
+                    <p class="testi-text" data-i18n="testi.t2">Working with Ibrahim on the E-Learning platform was smooth. He turned every Figma frame into production-ready code without losing a single detail.</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">M</div>
+                        <div class="testi-meta">
+                            <strong>Mariam Khaled</strong>
+                            <span data-i18n="testi.t2.role">UI/UX Designer</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="testimonial-card">
+                    <div class="testi-quote">"</div>
+                    <p class="testi-text" data-i18n="testi.t3">Very responsive, professional, and always open to feedback. I'd recommend Ibrahim for any front-end project that needs care and speed.</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">O</div>
+                        <div class="testi-meta">
+                            <strong>Omar Tarek</strong>
+                            <span data-i18n="testi.t3.role">Freelance Client</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         EXPERIENCE (same as yours)
+    ============================================================ -->
+    <section class="section section-alt" id="experience">
+        <div class="container">
+            <div class="sec-head">
+                <span class="sec-label" data-i18n="exp.label">06 · Experience</span>
+                <h2 class="sec-title">
+                    <span data-i18n="exp.title1">Work &</span>
+                    <span class="grad" data-i18n="exp.title2">Education</span>
+                </h2>
+                <p class="sec-sub" data-i18n="exp.sub">My journey so far.</p>
+            </div>
+
+            <div class="exp-timeline">
+                <div class="exp-item">
+                    <div class="exp-marker"></div>
+                    <div class="exp-body">
+                        <span class="exp-date" data-i18n="exp.e1.d">Jun 2025 — Aug 2025</span>
+                        <h3 class="exp-role" data-i18n="exp.e1.r">Full-Stack Developer</h3>
+                        <h4 class="exp-co">Digital Egypt Pioneers Initiative (DEPI)</h4>
+                        <p class="exp-desc" data-i18n="exp.e1.ds">Built a full-stack web app covering both front-end and back-end. Implemented the client-side with React.</p>
+                        <div class="exp-tags"><span>React</span><span>JavaScript</span><span>Full-Stack</span></div>
+                    </div>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-marker"></div>
+                    <div class="exp-body">
+                        <span class="exp-date" data-i18n="exp.e2.d">Feb 2025 — Apr 2025</span>
+                        <h3 class="exp-role" data-i18n="exp.e2.r">Front-End Developer — Booking Platform</h3>
+                        <h4 class="exp-co" data-i18n="exp.e2.c">Training Project</h4>
+                        <p class="exp-desc" data-i18n="exp.e2.ds">Owned the front-end of a multi-service booking platform covering halls, sports courts, and hotels.</p>
+                        <div class="exp-tags"><span>React</span><span>Tailwind</span><span data-i18n="skills.resp">Responsive</span></div>
+                    </div>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-marker"></div>
+                    <div class="exp-body">
+                        <span class="exp-date" data-i18n="exp.e3.d">Oct 2024 — Dec 2024</span>
+                        <h3 class="exp-role" data-i18n="exp.e3.r">Front-End Developer — E-Learning Platform</h3>
+                        <h4 class="exp-co" data-i18n="exp.e3.c">Training Project</h4>
+                        <p class="exp-desc" data-i18n="exp.e3.ds">Developed the client-side UI for a programming languages platform focused on usability.</p>
+                        <div class="exp-tags"><span>React</span><span>Tailwind</span><span>UI/UX</span></div>
+                    </div>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-marker"></div>
+                    <div class="exp-body">
+                        <span class="exp-date" data-i18n="exp.e4.d">2023 — 2027 (Expected)</span>
+                        <h3 class="exp-role" data-i18n="exp.e4.r">B.Sc. in Computers and Information Sciences</h3>
+                        <h4 class="exp-co">Tanta University</h4>
+                        <p class="exp-desc" data-i18n="exp.e4.ds">Focusing on software engineering, web development, algorithms, and modern front-end tech.</p>
+                        <div class="exp-tags"><span data-i18n="exp.e4.t1">Computer Science</span><span data-i18n="exp.e4.t2">Software Engineering</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CTA
+    ============================================================ -->
+    <section class="cta">
+        <div class="container cta-wrap">
+            <div class="cta-text">
+                <h2 class="cta-title" data-i18n="cta.title">Ready to start your project?</h2>
+                <p class="cta-sub" data-i18n="cta.sub">Let's build something great together.</p>
+            </div>
+            <a href="#contact" class="btn btn-primary btn-lg magnetic">
+                <span data-i18n="cta.btn">Let's Talk</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT
+    ============================================================ -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="sec-head">
+                <span class="sec-label" data-i18n="contact.label">07 · Contact</span>
+                <h2 class="sec-title">
+                    <span data-i18n="contact.title1">Get In</span>
+                    <span class="grad" data-i18n="contact.title2">Touch</span>
+                </h2>
+                <p class="sec-sub" data-i18n="contact.sub">Have a project? Let's discuss it.</p>
+            </div>
+
+            <div class="contact-wrap">
+                <div class="contact-side">
+                    <h3 data-i18n="contact.h">Let's talk about your idea</h3>
+                    <p data-i18n="contact.t">Drop me a message and I'll get back to you as soon as possible.</p>
+
+                    <div class="contact-list">
+                        <a href="mailto:eng.barhomaa@gmail.com" class="c-item">
+                            <div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                            <div class="c-meta"><span data-i18n="contact.email">Email</span><strong>eng.barhomaa@gmail.com</strong></div>
+                        </a>
+
+                        <a href="tel:+201270719250" class="c-item">
+                            <div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+                            <div class="c-meta"><span data-i18n="contact.phone">Phone</span><strong dir="ltr">+20 127 071 9250</strong></div>
+                        </a>
+
+                        <a href="https://linkedin.com/in/ebrahim-elghazaly-a34795349" target="_blank" rel="noopener" class="c-item">
+                            <div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></div>
+                            <div class="c-meta"><span>LinkedIn</span><strong>ebrahim-elghazaly</strong></div>
+                        </a>
+
+                        <a href="https://github.com/Hema-elghazaly" target="_blank" rel="noopener" class="c-item">
+                            <div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1 .8 2.1v3.1c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></div>
+                            <div class="c-meta"><span>GitHub</span><strong>Hema-elghazaly</strong></div>
+                        </a>
+
+                        <a href="https://www.youtube.com/channel/UCPDiJfqsEA3Z6h_omiqhSbQ" target="_blank" rel="noopener" class="c-item">
+                            <div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
+                            <div class="c-meta"><span>YouTube</span><strong>@IbrahimElghazaly</strong></div>
+                        </a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="name" data-i18n="form.name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required autocomplete="name">
+                        </div>
+                        <div class="form-field">
+                            <label for="phone" data-i18n="form.phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+20 1XX XXX XXXX" required autocomplete="tel">
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="email" data-i18n="form.email">Your Email</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required autocomplete="email">
+                    </div>
+                    <div class="form-field">
+                        <label for="subject" data-i18n="form.subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Project inquiry" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="message" data-i18n="form.message">Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span data-i18n="form.send">Send Message</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                    <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="container footer-wrap">
+            <div class="footer-col">
+                <a href="#home" class="brand">
+                    <span class="brand-avatar"><img src="assets/images/profile.webp" alt="Ibrahim" width="42" height="42"></span>
+                    <span class="brand-text"><strong>Ibrahim</strong><small data-i18n="nav.role">Front-End Dev</small></span>
+                </a>
+                <p class="footer-desc" data-i18n="footer.desc">Front-End Developer building modern, fast, and responsive web experiences.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title" data-i18n="footer.links">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#about" data-i18n="nav.about">About</a></li>
+                    <li><a href="#services" data-i18n="nav.services">Services</a></li>
+                    <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+                    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title" data-i18n="footer.follow">Follow Me</h4>
+                <div class="footer-social">
+                    <a href="https://github.com/Hema-elghazaly" target="_blank" rel="noopener" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1 .8 2.1v3.1c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+                    <a href="https://linkedin.com/in/ebrahim-elghazaly-a34795349" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+                    <a href="mailto:eng.barhomaa@gmail.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+                    <a href="https://www.youtube.com/channel/UCPDiJfqsEA3Z6h_omiqhSbQ" target="_blank" rel="noopener" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-wrap">
+                <p class="copyright">© <span id="year"></span> Ibrahim Elghazaly. <span data-i18n="footer.rights">All rights reserved.</span></p>
+                <p class="made-with" data-i18n="footer.made">Designed & Built with ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="to-top" id="toTop" aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <script src="script.js" defer></script>
+    <script src="enhancements.js" defer></script>
+</body>
+</html>
