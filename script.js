@@ -719,7 +719,7 @@
         const statusEl = document.getElementById('formStatus');
         if (!form) return;
 
-        const ENDPOINT = 'https://formspree.io/f/xjyvlrkb';
+        const ENDPOINT = 'https://formspree.io/f/mvkzkokp';
 
         const showStatus = (msg, isError = false) => {
             if (!statusEl) return;
